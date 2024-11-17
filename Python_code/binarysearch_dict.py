@@ -68,37 +68,82 @@ from typing import List
 
 # print(binarysearch_dict(dict, target))
 
-def find_first_occur(a: List[int], target:int):
-    lo, hi = 0, len(a)-1
+def find_firstlast_occur(a: List[int], target:int):
+    # lo, hi = 0, len(a)-1
 
-    while lo <= hi:        
-        mid = (lo+hi)//2
-        # print(f"lo = {lo}, mid = {mid}, hi = {hi}")
-        if a[mid] < target:
-            lo = mid+1
-        else:
-            hi = mid-1
+    # while lo <= hi:        
+    #     mid = (lo+hi)//2
+    #     # print(f"lo = {lo}, mid = {mid}, hi = {hi}")
+    #     if a[mid] < target:
+    #         lo = mid+1
+    #     else:
+    #         hi = mid-1
 
-    lower = lo
+    # lower = lo if lo <= len(a)-1 and a[lo] == target else -1
+
+    # if lower == -1: return -1
     
-    lo, hi = 0, len(a)-1
+    # lo, hi = 0, len(a)-1
 
-    while lo <= hi:        
-        mid = (lo+hi)//2
-        # print(f"lo = {lo}, mid = {mid}, hi = {hi}")
-        if a[mid] <= target:
-            lo = mid+1
-        else:
-            hi = mid-1
+    # while lo <= hi:        
+    #     mid = (lo+hi)//2
+    #     # print(f"lo = {lo}, mid = {mid}, hi = {hi}")
+    #     if a[mid] <= target:
+    #         lo = mid+1
+    #     else:
+    #         hi = mid-1
     
-    upper = hi
+    # upper = hi
 
-    return (lower, upper) if lower <= len(a)-1 and a[lower] == target else -1
+    # return (lower, upper)
+    lower = find_first_occur(a, target)
+
+    if lower == -1: return lower
+
+    upper = find_last_occur(a, target)
+
+    return (lower, upper)
+
+def find_first_occur(arr:List[int], target:int)->int:
+    left, right = 0, len(arr) - 1
+    result = -1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if arr[mid] == target:
+            result = mid
+            right = mid - 1  # continue searching in the left half
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return result
+
+def find_last_occur(arr:List[int], target:int)->int:
+    left, right = 0, len(arr) - 1
+    result = -1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if arr[mid] == target:
+            result = mid
+            left = mid + 1  # continue searching in the right half
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return result
 
 # test case
 a = [1, 3, 8, 10, 10, 10, 13, 15]
 
-target = 15
+target = 18
 
 print(f"input: {a}")
-print(f"first occurrence of {target}: {find_first_occur(a, target)}")
+# print(f"first occurrence of {target}: {find_first_occur(a, target)}")
+# print(f"last occurrence of {target}: {find_last_occur(a, target)}")
+print(f"first and last occurrence of {target}: {find_firstlast_occur(a, target)}")
