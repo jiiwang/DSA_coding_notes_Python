@@ -1,23 +1,26 @@
 from typing import List
 
-def combinations(a:List[int], target:int)->List[List[int]]:
-    n = len(a)
-    comb = []
-
-    def backtracking(sum:int, curr_idx:int, curr_comb:List[int]):
-        print(f"sum: {sum}, curr_idx: {curr_idx}, curr_comb: {curr_comb}")
-        if sum >= target:
-            comb.append(curr_comb[:]) # copy is needed
-            if len(curr_comb) == n:
+def combinations_with_sum_ge_k(nums, k):
+    result = []
+    n = len(nums)
+    
+    # Helper function to generate combinations
+    def generate_combinations(start, current_comb, sum):
+        if sum >= k:
+            result.append(current_comb[:])
+            if len(current_comb) == n:
                 return
-        
-        curr_comb.append(curr_idx)
-        for j in range(curr_idx, n):
-            backtracking(sum+a[curr_idx], j, curr_comb)
-        curr_comb.pop()        
-
-    backtracking(0, 0, [])
-    return comb
+            
+        for i in range(start, n):
+            current_comb.append(i)
+            # sum += nums[i]
+            generate_combinations(i + 1, current_comb, sum+nums[i])
+            # sum -= nums[i]
+            current_comb.pop()
+    
+    # Generate all combinations
+    generate_combinations(0, [], 0)
+    return result
 
 # test case
 a = [3,6,1]
@@ -25,5 +28,5 @@ target = 5
 
 print(f"input array: \n{a}")
 print(f"target: {target}")
-print(f"combinations whose sum >= target: \n {combinations(a, target)}")
+print(f"combinations whose sum >= target: \n {combinations_with_sum_ge_k(a, target)}")
 
