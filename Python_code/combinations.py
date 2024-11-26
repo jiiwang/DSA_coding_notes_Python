@@ -7,7 +7,7 @@ def combinations_with_sum_ge_k(nums, k):
     # Helper function to generate combinations
     def generate_combinations(start, current_comb, sum):
         if sum >= k:
-            result.append(current_comb[:])
+            result.append(current_comb[:])  # need to make a copy
             if len(current_comb) == n:
                 return
             

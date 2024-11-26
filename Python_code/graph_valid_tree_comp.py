@@ -1,14 +1,19 @@
 import time
 import random
+from collections import deque
 
-# Helper function to generate edges for a graph with n nodes
-def generate_edges(n, is_tree=True):
+# Helper function to generate edges for a balanced tree with n nodes
+def generate_balanced_tree_edges(n):
     edges = []
-    for i in range(1, n):
-        edges.append((i - 1, i))
-    if not is_tree:
-        extra_edges = [(random.randint(0, n-1), random.randint(0, n-1)) for _ in range(n // 2)]
-        edges.extend(extra_edges)
+    queue = deque([0])
+    current_node = 1
+    while current_node < n:
+        parent = queue.popleft()
+        for _ in range(2):  # Each node will have up to 2 children
+            if current_node < n:
+                edges.append((parent, current_node))
+                queue.append(current_node)
+                current_node += 1
     return edges
 
 # Union-Find base class
@@ -77,9 +82,9 @@ def is_valid_tree(n, edges, uf_class):
     return True
 
 # Running the tests
-n = 10000
+n = 1000
 trials = 100
-edges = generate_edges(n)
+edges = generate_balanced_tree_edges(n)
 
 implementations = [
     ("Basic Union-Find", UnionFind),
