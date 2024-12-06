@@ -95,4 +95,10 @@
 
 # deleteTree(root)
 
-print(-25%26)
+# print(-25%26)
+
+# sequential structure (list/string) slicing
+s = 'vrounbr'
+i = 3
+print(s[i::-1])
+print(s[:i:-1])
