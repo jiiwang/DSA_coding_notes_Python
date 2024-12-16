@@ -98,7 +98,10 @@
 # print(-25%26)
 
 # sequential structure (list/string) slicing
-s = 'vrounbr'
-i = 3
-print(s[i::-1])
-print(s[:i:-1])
+# s = 'vrounbr'
+# i = 3
+# print(s[i::-1])
+# print(s[:i:-1])
+
+s = 'b'
+print(int(s)-int('a'))
