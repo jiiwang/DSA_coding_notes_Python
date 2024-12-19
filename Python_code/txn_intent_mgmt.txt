@@ -1,0 +1,4 @@
+START account1 0
+NEW txn1 account1 50
+PROCESS txn1
+COMPLETE txn1
