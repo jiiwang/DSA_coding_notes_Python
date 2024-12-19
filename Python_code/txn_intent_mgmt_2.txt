@@ -1,0 +1,11 @@
+START account2 15
+NEW txn3 account2 20
+PROCESS txn3
+COMPLETE txn3
+START account1 0
+NEW txn1 account1 50
+PROCESS txn1
+CANCEL txn1
+PROCESS txn1
+COMPLETE txn1
+RETURN txn1

@@ -1,0 +1,5 @@
+1 START account1 0 15
+2 NEW txn1 account1 100
+8 COMPLETE txn1
+11 RETURN txn1
+16 RETURN txn1
